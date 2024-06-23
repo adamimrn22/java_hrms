@@ -1,0 +1,6 @@
+Department ID     | Department Name      
+----------------------------------------
+D0001             | Finance          
+D0002             | Human Resource                    
+D0003             | Information Technology       
+

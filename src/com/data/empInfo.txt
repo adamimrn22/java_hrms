@@ -1,0 +1,2 @@
+S001,pass,ADMIN
+S002,pass,STAFF

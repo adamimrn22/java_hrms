@@ -1,0 +1,6 @@
+Staff ID          | street              | postalCode  | state      | country    
+---------------------------------------------------------------------------------------
+S0001             | Jalan Insaf         | 555555      | Johor      | malaysia
+S0002             | Jalan Insaf         | 55555       | Johor      | malaysia
+S0003             | Jalan Insaf         | 5555        | Johor      | malaysia
+
