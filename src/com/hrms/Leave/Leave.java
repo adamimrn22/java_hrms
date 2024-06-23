@@ -24,13 +24,6 @@ public class Leave {
         loadLeaveData();
     }
 
-    // public Leave(String leaveID, String empID, double leaveDays, String status) {
-    // this.leaveID = leaveID;
-    // this.empID = empID;
-    // this.leaveDays = leaveDays;
-    // this.status = status;
-    // }
-
     public Leave(String leaveID, String empID, String startDate, String endDate, double leaveDays,
             LeaveStatus status) {
         this.leaveID = leaveID;

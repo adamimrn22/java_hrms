@@ -12,7 +12,6 @@ import com.hrms.Utils.Util;
 public class LeaveApplication {
 
     public LeaveApplication() {
-        // Leave.loadLeaveData();
     }
 
     public static void leaveMenu() {
