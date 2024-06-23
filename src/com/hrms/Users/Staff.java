@@ -143,9 +143,8 @@ public class Staff extends Employee implements EmployeeInfo {
             System.out.println("All Staff Members:");
             System.out.println("==================");
             for (Staff staff : staffList) {
-                System.out.println("------------------\n");
+                System.out.println("------------------");
                 System.out.println(staff.toString());
-                System.out.println("------------------\n");
             }
         }
     }
@@ -233,7 +232,8 @@ public class Staff extends Employee implements EmployeeInfo {
         Staff staff = Staff.getEmpByID(empID);
 
         if (salary != null && staff != null) {
-            System.out.println(staff.getEmpID());
+            System.out.println("=============================================");
+            System.out.println("Employee ID :" + staff.getEmpID());
             System.out.println(staff.getName());
             System.out.println(salary);
         } else {

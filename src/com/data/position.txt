@@ -1,8 +1,8 @@
 Position ID     | Position Title         |Department ID           
 ----------------------------------------------------------- 
-P0001           | Executive Assistant    |D0001                              
+P0001           | Executive Accountant   |D0001                              
 P0002           | Head Manager           |D0002                       
-P0003           | Executive Accountant   |D0003                         
+P0003           | Executive Assistant    |D0003                         
 
 
 

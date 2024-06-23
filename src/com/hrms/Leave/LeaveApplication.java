@@ -9,22 +9,24 @@ import java.util.Scanner;
 import com.hrms.Utils.Auth;
 import com.hrms.Utils.Util;
 
-public class LeaveApplication {
+public class LeaveApplication implements LeaveViewer {
 
     public LeaveApplication() {
     }
 
     public static void leaveMenu() {
         Scanner s = new Scanner(System.in);
+        LeaveApplication leaveApplication = new LeaveApplication();
 
         int opt = 0;
         try {
-            while (opt != 4) {
+            while (opt != 5) {
                 System.out.println("Leave Management Menu");
                 System.out.println("1. Add Leave Request");
                 System.out.println("2. View Approved Leave Requests");
-                System.out.println("3. View Pending Leave Requests");
-                System.out.println("4. Exit");
+                System.out.println("3. View Pending  Leave Requests");
+                System.out.println("4. View Rejected Leave Requests");
+                System.out.println("5. Exit");
                 System.out.print("Enter option number (1-4): ");
                 opt = s.nextInt();
                 s.nextLine();
@@ -35,12 +37,17 @@ public class LeaveApplication {
                         addLeaveRequest();
                         break;
                     case 2:
-                        viewLeaveRequests(LeaveStatus.APPROVED);
+                        leaveApplication.viewLeavesByStatus(LeaveStatus.APPROVED);
                         break;
                     case 3:
-                        viewLeaveRequests(LeaveStatus.PENDING);
+                        leaveApplication.viewLeavesByStatus(LeaveStatus.PENDING);
                         break;
+
                     case 4:
+                        leaveApplication.viewLeavesByStatus(LeaveStatus.REJECTED);
+                        break;
+
+                    case 5:
                         System.out.println("Exiting...");
                         return;
                     default:
@@ -103,14 +110,18 @@ public class LeaveApplication {
             Leave.leaveList.add(newLeave);
             LeaveManagement.writeLeavesToFile();
 
+            Util.clearMenu();
             System.out.println("Leave request added successfully.");
 
+            LeaveApplication leaveApplication = new LeaveApplication();
+            leaveApplication.viewLeavesByStatus(LeaveStatus.PENDING);
         } catch (Exception e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
     }
 
-    public static void viewLeaveRequests(LeaveStatus status) {
+    @Override
+    public void viewLeavesByStatus(LeaveStatus status) {
         String empID = Auth.loggedInEmpID;
 
         if (empID == null || empID.isEmpty()) {
@@ -120,17 +131,27 @@ public class LeaveApplication {
 
         Util.clearMenu();
 
-        System.out.printf("%-10s | %-10s | %-15s | %-15s | %-10s | %-10s\n",
-                "LEAVE ID", "STAFF ID", "START DATE", "END DATE", "LEAVE DAYS", "STATUS");
+        System.out.printf("%-5s | %-10s | %-15s | %-15s | %-10s | %-10s\n",
+                "No", "LEAVE ID", "START DATE", "END DATE", "LEAVE DAYS", "STATUS");
         System.out.println("------------------------------------------------------------------------");
 
+        boolean recordFound = false;
+
+        int i = 1;
         for (Leave leave : Leave.leaveList) {
             if (leave.getEmpID().equals(empID) && leave.getStatus() == status) {
-                System.out.printf("%-10s | %-10s | %-15s | %-15s | %-10.2f | %-10s\n",
-                        leave.getLeaveID(), leave.getEmpID(), leave.getStartDate(), leave.getEndDate(),
+                System.out.printf("%-5s | %-10s | %-15s | %-15s | %-10.2f | %-10s\n",
+                        i, leave.getLeaveID(), leave.getStartDate(), leave.getEndDate(),
                         leave.getLeaveDays(), leave.getStatus());
+                recordFound = true;
+                i++;
             }
         }
+
+        if (!recordFound) {
+            System.out.println("\t\tNo Record Found");
+        }
+
         System.out.println("\n");
     }
 

@@ -180,6 +180,7 @@ public class StaffManagement {
             writeEmployeeToFile(empID, firstName, lastName, dob, gender, contactNumber, email, pos.getPositionID(),
                     deptID, "STAFF");
 
+            viewStaff();
             System.out.println("Employee added successfully.");
         } catch (InputMismatchException e) {
             System.out.println("Invalid input format. Please enter valid data.");
@@ -319,6 +320,7 @@ public class StaffManagement {
             }
 
             updateEmployeeInFile();
+            viewStaff();
             System.out.println("Employee updated successfully.");
         } catch (InputMismatchException e) {
             System.out.println("Invalid input format. Please enter valid data.");
@@ -351,7 +353,6 @@ public class StaffManagement {
             }
 
             System.out.println("Employee data file updated");
-
         } catch (IOException e) {
             System.err.println("Error updating file" + e.getMessage());
         }
@@ -371,13 +372,14 @@ public class StaffManagement {
 
             if (staffToDelete != null) {
                 Staff.staffList.remove(staffToDelete);
-                System.out.println("Employee with ID " + empID + " deleted from staffList.");
             } else {
                 System.out.println("Employee with ID " + empID + " not found in staffList.");
                 return;
             }
 
             deleteEmployeeFromFile(empID);
+            System.out.println("Employee with ID " + empID + " deleted from staffList.");
+            viewStaff();
         } catch (Exception e) {
             System.err.println("An error occurred during deletion: " + e.getMessage());
         }

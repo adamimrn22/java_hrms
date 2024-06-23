@@ -1,5 +1,0 @@
-S0001      | ADAM            | IMRAN           | 22/02/2003      | MALE     | 017474     | ddsf            | P0001      | D0001      | STAFF     
-S0002      | ADE             | IEREN           | 22/02/2003      | MALE     | 017474     | ddsf            | P0001      | D0001      | STAFF     
-S0003      | ABY             | DEDE            | 22/02/2003      | MALE     | 017474     | ddsf            | P0003      | D0003      | STAFF     
-S0004      | AEREERE         | ZDCEE           | 22/02/2003      | MALE     | 017474     | ddsf            | P0002      | D0002      | STAFF     
-S0005      | ABU             | LAMAR           | 20/2/1994       | MALE     | 010-101-1102 | kdot@gmail.com  | P0002      | D0002      | STAFF     

@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 import com.hrms.Utils.Util;
 
-public class LeaveManagement {
+public class LeaveManagement implements LeaveViewer {
 
     public static final String leaveTempPath = "C:\\Users\\adami\\Desktop\\OOP\\Project\\java_hrms\\src\\com\\data\\leaveTemp.txt";
 
@@ -31,10 +31,10 @@ public class LeaveManagement {
 
                 switch (opt) {
                     case 1:
-                        viewApprovedLeaves();
+                        viewLeavesByStatus(LeaveStatus.APPROVED);
                         break;
                     case 2:
-                        viewPendingLeaves();
+                        viewLeavesByStatus(LeaveStatus.PENDING);
                         break;
                     case 3:
                         approveLeave();
@@ -54,34 +54,26 @@ public class LeaveManagement {
         s.close();
     }
 
-    public void viewApprovedLeaves() {
+    @Override
+    public void viewLeavesByStatus(LeaveStatus status) {
         Util.clearMenu();
-        System.out.printf("%-10s | %-10s |  %-10s |  %-10s| %-10s | %-10s\n", "LEAVE ID", "STAFF ID", "Start Date",
-                "End Date", "Leave Days",
-                "Status");
+        System.out.printf("%-10s | %-10s |  %-10s |  %-10s | %-10s | %-10s\n", "LEAVE ID", "STAFF ID", "Start Date",
+                "End Date", "Leave Days", "Status");
         System.out.println("--------------------------------------------------------------");
+
+        boolean recordFound = false;
+
         for (Leave leave : Leave.leaveList) {
-            if (leave.getStatus() == LeaveStatus.APPROVED) {
-                System.out.printf("%-10s | %-10s |  %-10s |  %-10s| %-10s | %-10s\n",
+            if (leave.getStatus() == status) {
+                System.out.printf("%-10s | %-10s |  %-10s |  %-10s | %-10s | %-10s\n",
                         leave.getLeaveID(), leave.getEmpID(), leave.getStartDate(), leave.getEndDate(),
                         leave.getLeaveDays(), leave.getStatus());
+                recordFound = true;
             }
         }
-        System.out.println("\n");
-    }
 
-    public void viewPendingLeaves() {
-        Util.clearMenu();
-        System.out.printf("%-10s | %-10s |  %-10s |  %-10s| %-10s | %-10s\n", "LEAVE ID", "STAFF ID", "Start Date",
-                "End Date", "Leave Days",
-                "Status");
-        System.out.println("--------------------------------------------------------------");
-        for (Leave leave : Leave.leaveList) {
-            if (leave.getStatus() == LeaveStatus.PENDING) {
-                System.out.printf("%-10s | %-10s |  %-10s |  %-10s| %-10s | %-10s\n",
-                        leave.getLeaveID(), leave.getEmpID(), leave.getStartDate(), leave.getEndDate(),
-                        leave.getLeaveDays(), leave.getStatus());
-            }
+        if (!recordFound) {
+            System.out.println("No Record Found");
         }
         System.out.println("\n");
     }
@@ -95,7 +87,9 @@ public class LeaveManagement {
         if (leaveToApprove != null) {
             leaveToApprove.setStatus(LeaveStatus.APPROVED);
             writeLeavesToFile();
+            Util.clearMenu();
             System.out.println("Leave approved for leave ID " + leaveID);
+            viewLeavesByStatus(LeaveStatus.APPROVED);
         } else {
             System.out.println("No pending leave found for leave ID " + leaveID);
         }
@@ -110,7 +104,9 @@ public class LeaveManagement {
         if (leaveToReject != null) {
             leaveToReject.setStatus(LeaveStatus.REJECTED);
             writeLeavesToFile();
+            Util.clearMenu();
             System.out.println("Leave rejected for leave ID " + leaveID);
+            viewLeavesByStatus(LeaveStatus.REJECTED);
         } else {
             System.out.println("No pending leave found for leave ID " + leaveID);
         }

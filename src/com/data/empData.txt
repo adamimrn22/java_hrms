@@ -1,4 +1,3 @@
 S0001      | ADAM            | IMRAN           | 22/02/2003      | MALE     | 017474     | ddsf            | P0001      | D0001      | ADMIN     
-S0002      | ADE             | IEREN           | 22/02/2003      | MALE     | 017474     | ddsf            | P0001      | D0001      | STAFF     
-S0003      | ABY             | DEDE            | 22/02/2003      | MALE     | 017474     | ddsf            | P0003      | D0003      | STAFF     
-S0005      | ABU             | LAMAR           | 202020          | MALE     | 210031     | ASDKMAMKD@ADKM  | P0001      | D0001      | STAFF     
+S0003      | KENDRICK        | LAMAR           | 20-2-2002       | MALE     | 010-102-2102 | kdot@gmail.com  | P0003      | D0003      | STAFF     
+S0002      | KAMARU          | USMAN           | 12/12/2002      | MALE     | 012-210-2121 | usman@gmail.com | P0003      | D0003      | STAFF     
